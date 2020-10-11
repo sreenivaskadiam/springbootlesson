@@ -1,11 +1,10 @@
 package com.roadmap.restservice;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 @Component
 public class RouteMapRestService {
@@ -13,7 +12,7 @@ public class RouteMapRestService {
 	private static Map<String, String> roadMap = new HashMap<String, String>();
 
 	static {
-		roadMap.put("boston", "newyork");
+		roadMap.put("boston", "new york");
 		roadMap.put("philadelphia", "newark");
 		roadMap.put("newark", "boston");
 		roadMap.put("trenton", "albany");
@@ -21,17 +20,29 @@ public class RouteMapRestService {
 	}
 
 	public String getRoadMap(final String origin, final String destination) {
-		return destination.equalsIgnoreCase(roadMap.get(origin)) ? "yes" : mapValue(origin, destination);
+		if (destination.equalsIgnoreCase(roadMap.get(origin)) || origin.equalsIgnoreCase(roadMap.get(destination))) {
+			return "yes";
+		} else {
+			if (!StringUtils.isEmpty(roadMap.get(destination)) && !StringUtils.isEmpty(mapValue(destination, origin))) {
+				return "yes";
+			} else if (!StringUtils.isEmpty(roadMap.get(origin))
+					&& !StringUtils.isEmpty(mapValue(origin, destination))) {
+				return "yes";
+			}
+		}
+		return "no";
 	}
 
-	public String mapValue(final String origin, final String destination) {
-		List<String> result = new ArrayList<String>();
-		roadMap.forEach((K, V) -> {
-			if (destination.equalsIgnoreCase(V)) {
-				result.add("yes");
+	public String mapValue(String keyName, final String destination) {
+		String value = roadMap.get(keyName);
+		if(null!=keyName && null!=value) {
+			if (destination.equalsIgnoreCase(value)) {
+				return "yes";
+			}else {
+				return mapValue(value, destination);
 			}
-		});
-
-		return null != result && result.size() > 0 ? "yes" : "no";
+			
+		}
+		return  null;
 	}
 }
