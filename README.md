@@ -1,4 +1,4 @@
-# springbootlesson
+# springboot exercise
 The Sample Service can be run in either container or as regular service
 Use Case: 
 Boston, New York
