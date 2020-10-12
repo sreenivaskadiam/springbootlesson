@@ -42,7 +42,6 @@ public class RouteMapRestService {
 						if(null!=line) {
 							final String []cityData = line.split(",");
 							if(null!=cityData && cityData.length>1) {
-								System.out.println("this is "+cityData[0]+cityData[1]);
 								roadMap.put(cityData[0].toLowerCase(), cityData[1].toLowerCase());
 							}
 							
@@ -52,8 +51,7 @@ public class RouteMapRestService {
 			}
 			
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
 	}
 
