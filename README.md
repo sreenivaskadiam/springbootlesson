@@ -6,7 +6,7 @@ Philadelphia, Newark
 Newark, Boston
 Trenton, Albany
 
-The above data is hard coded in the map and accessed in the bussion service(RouteMapRestService).
+The city's data is reading text file and proccessing in the RouteMapRestService class.
 
 Container:
 Docker File which contains set of intstructions to execute the container in the Docker in the plattform
@@ -18,3 +18,5 @@ docker run -p 8080:8080 roadmapspringbootexercise .
 
 if you are running this program in windows machine, then please use docker machine ip(192.168.99.100). Please access like below
 http://192.168.99.100:8080/connected?origin=Boston&destination=Philadelphia
+
+The unit tests are done in the class RouteMapRestControllerTest
